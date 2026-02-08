@@ -13,9 +13,12 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.UriInfo;
 import uce.edu.reservas.application.AvionService;
 import uce.edu.reservas.application.representation.AvionRepresentation;
+import uce.edu.reservas.application.representation.LinkDTO;
 
 @Path("/aviones")
 @Consumes("application/json")
@@ -24,18 +27,21 @@ public class AvionResource {
     @Inject
     private AvionService avionService;
 
+    @Context
+    private UriInfo info;
+
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public List<AvionRepresentation> encontrarTodos() {
-        return this.avionService.listarTodos();
+        return this.construirLinks(this.avionService.listarTodos());
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AvionRepresentation encontrarPorId(@PathParam("id") Integer id) {
-        return this.avionService.consultarPorId(id);
+        return this.construirLinks(this.avionService.consultarPorId(id));
     }
 
     @POST
@@ -70,6 +76,27 @@ public class AvionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<AvionRepresentation> buscarPorAerolinea(@QueryParam("aerolinea") String aerolinea) {
         return this.avionService.buscarPorAerolinea(aerolinea);
+    }
+
+    private AvionRepresentation construirLinks(AvionRepresentation avion) {
+        String self = this.info.getBaseUriBuilder().path(AvionResource.class).path(String.valueOf(avion.getId()))
+                .build().toString();
+
+        avion.setLinks(List.of(new LinkDTO(self, "self")));
+        return avion;
+    }
+
+    private List<AvionRepresentation> construirLinks(List<AvionRepresentation> aviones) {
+        for (AvionRepresentation avion : aviones) {
+            String self = this.info.getBaseUriBuilder()
+                    .path(AvionResource.class)
+                    .path(String.valueOf(avion.getId()))
+                    .build()
+                    .toString();
+
+            avion.setLinks(List.of(new LinkDTO(self, "self")));
+        }
+        return aviones;
     }
 
 }

@@ -1,13 +1,17 @@
 package uce.edu.reservas.application.representation;
 
+import java.util.List;
+
 public class AvionRepresentation {
     private Integer id;
     private String modelo;
     private Integer capacidad;
     private String aerolinea;
     private String clase;
-
     private String espacioEquipaje;
+    private List<LinkDTO> links;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -57,4 +61,11 @@ public class AvionRepresentation {
         this.espacioEquipaje = espacioEquipaje;
     }
 
+    public List<LinkDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<LinkDTO> links) {
+        this.links = links;
+    }
 }
