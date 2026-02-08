@@ -35,7 +35,6 @@ public class Pasajero extends PanacheEntityBase {
     @Column(name = "correo")
     private String correo;
 
-    @Column(name = "id_reserva")
     @OneToMany(mappedBy = "pasajero")
     private Set<Reserva> reservas;
 

@@ -35,7 +35,6 @@ public class Avion extends PanacheEntityBase {
     @Column(name = "espacio_equipaje")
     private String espacioEquipaje;
 
-    @Column(name = "id_reserva")
     @OneToMany(mappedBy = "avion")
     private Set<Reserva> reservas;
 

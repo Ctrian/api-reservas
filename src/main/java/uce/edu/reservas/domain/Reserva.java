@@ -1,7 +1,5 @@
 package uce.edu.reservas.domain;
 
-import java.util.Set;
-
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
