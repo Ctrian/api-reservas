@@ -38,6 +38,8 @@ public class PasajeroService {
         }
         entity.setNombre(pasajero.getNombre());
         entity.setApellido(pasajero.getApellido());
+        entity.setCedula(pasajero.getCedula());
+        entity.setTelefono(pasajero.getTelefono());
         entity.setCorreo(pasajero.getCorreo());
         this.pasajeroRepository.getEntityManager().merge(entity);
     }
@@ -53,6 +55,12 @@ public class PasajeroService {
         }
         if (pasajero.getApellido() != null) {
             entity.setApellido(pasajero.getApellido());
+        }
+        if (pasajero.getCedula() != null) {
+            entity.setCedula(pasajero.getCedula());
+        }
+        if (pasajero.getTelefono() != null) {
+            entity.setTelefono(pasajero.getTelefono());
         }
         if (pasajero.getCorreo() != null) {
             entity.setCorreo(pasajero.getCorreo());
@@ -74,6 +82,8 @@ public class PasajeroService {
         representation.setId(pasajero.getId());
         representation.setNombre(pasajero.getNombre());
         representation.setApellido(pasajero.getApellido());
+        representation.setCedula(pasajero.getCedula());
+        representation.setTelefono(pasajero.getTelefono());
         representation.setCorreo(pasajero.getCorreo());
         return representation;
     }
@@ -83,6 +93,8 @@ public class PasajeroService {
         entity.setId(representation.getId());
         entity.setNombre(representation.getNombre());
         entity.setApellido(representation.getApellido());
+        entity.setCedula(representation.getCedula());
+        entity.setTelefono(representation.getTelefono());
         entity.setCorreo(representation.getCorreo());
         return entity;
     }
