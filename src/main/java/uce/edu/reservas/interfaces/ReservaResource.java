@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -13,15 +14,12 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import uce.edu.reservas.application.ReservaService;
 import uce.edu.reservas.application.representation.LinkDTO;
 import uce.edu.reservas.application.representation.ReservaRepresentation;
 
 @Path("/reservas")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class ReservaResource {
 
     @Inject
@@ -45,35 +43,30 @@ public class ReservaResource {
     }
 
     @POST
-    public Response crear(ReservaRepresentation reserva) {
-        try {
-            this.reservaService.crear(reserva);
-            return Response.status(Response.Status.CREATED).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    @Path("")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void crear(ReservaRepresentation reserva) {
+        this.reservaService.crear(reserva);
     }
 
     @PUT
     @Path("/{id}")
-    public Response actualizar(@PathParam("id") Integer id, ReservaRepresentation reserva) {
-        try {
-            this.reservaService.actualizar(id, reserva);
-            return Response.ok().build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void actualizar(@PathParam("id") Integer id, ReservaRepresentation reserva) {
+        this.reservaService.actualizar(id, reserva);
+    }
+
+    @PATCH
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void actualizarParcial(@PathParam("id") Integer id, ReservaRepresentation reserva) {
+        this.reservaService.actualizarParcial(id, reserva);
     }
 
     @DELETE
     @Path("/{id}")
-    public Response eliminar(@PathParam("id") Integer id) {
-        try {
-            this.reservaService.eliminar(id);
-            return Response.ok().build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    public void eliminar(@PathParam("id") Integer id) {
+        this.reservaService.eliminar(id);
     }
 
     private ReservaRepresentation construirLinks(ReservaRepresentation reserva) {

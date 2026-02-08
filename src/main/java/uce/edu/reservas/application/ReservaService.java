@@ -60,6 +60,21 @@ public class ReservaService {
     }
 
     @Transactional
+    public void actualizarParcial(Integer id, ReservaRepresentation reserva) {
+        Reserva entity = this.reservaRepository.findById(id.longValue());
+        if (entity == null) {
+            return;
+        }
+        entity.setFecha(reserva.getFecha());
+        entity.setEstado(reserva.getEstado());
+        entity.setPrecio(reserva.getPrecio());
+        entity.setAsiento(reserva.getAsiento());
+        entity.setAvion(this.avionRepository.findById(reserva.getIdAvion()));
+        entity.setPasajero(this.pasajeroRepository.findById(reserva.getIdPasajero()));
+        this.reservaRepository.getEntityManager().merge(this.mappearReserva(reserva));
+    }
+
+    @Transactional
     public void eliminar(Integer id) {
         Reserva entity = this.reservaRepository.findById(id.longValue());
         if (entity == null) {
