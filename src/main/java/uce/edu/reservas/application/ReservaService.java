@@ -30,8 +30,9 @@ public class ReservaService {
         return this.reservaRepository.listAll().stream().map(this::mapper).toList();
     }
 
-    public Reserva consultarPorId(Long id) {
-        return this.reservaRepository.findById(id);
+    public ReservaRepresentation consultarPorId(Integer id) {
+        Reserva reserva = this.reservaRepository.findById(id.longValue());
+        return reserva != null ? this.mapper(reserva) : null;
     }
 
     @Transactional
@@ -40,8 +41,8 @@ public class ReservaService {
     }
 
     @Transactional
-    public void actualizar(Long id, ReservaRepresentation reserva) {
-        Reserva entity = this.reservaRepository.findById(id);
+    public void actualizar(Integer id, ReservaRepresentation reserva) {
+        Reserva entity = this.reservaRepository.findById(id.longValue());
 
         Avion avion = this.avionRepository.findById(reserva.getIdAvion());
         Pasajero pasajero = this.pasajeroRepository.findById(reserva.getIdPasajero());
@@ -59,8 +60,8 @@ public class ReservaService {
     }
 
     @Transactional
-    public void eliminar(Long id) {
-        Reserva entity = this.reservaRepository.findById(id);
+    public void eliminar(Integer id) {
+        Reserva entity = this.reservaRepository.findById(id.longValue());
         if (entity == null) {
             return;
         }

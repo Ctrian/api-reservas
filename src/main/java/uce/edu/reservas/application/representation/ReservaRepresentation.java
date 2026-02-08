@@ -1,5 +1,7 @@
 package uce.edu.reservas.application.representation;
 
+import java.util.List;
+
 public class ReservaRepresentation {
     private Integer id;
     private String fecha;
@@ -11,6 +13,9 @@ public class ReservaRepresentation {
     private Integer asiento;
     private Long idAvion;
     private Long idPasajero;
+    private List<LinkDTO> links;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -90,5 +95,13 @@ public class ReservaRepresentation {
 
     public void setIdPasajero(Long idPasajero) {
         this.idPasajero = idPasajero;
+    }
+
+    public List<LinkDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<LinkDTO> links) {
+        this.links = links;
     }
 }

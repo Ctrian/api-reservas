@@ -11,9 +11,12 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 import uce.edu.reservas.application.ReservaService;
+import uce.edu.reservas.application.representation.LinkDTO;
 import uce.edu.reservas.application.representation.ReservaRepresentation;
 
 @Path("/reservas")
@@ -24,21 +27,21 @@ public class ReservaResource {
     @Inject
     private ReservaService reservaService;
 
+    @Context
+    private UriInfo info;
+
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ReservaRepresentation> encontrarTodos() {
-        return this.reservaService.listarTodos();
+        return this.construirLinks(this.reservaService.listarTodos());
     }
 
     @GET
     @Path("/{id}")
-    public Response consultarPorId(@PathParam("id") Long id) {
-        try {
-            return Response.ok(this.reservaService.consultarPorId(id)).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
-        }
+    @Produces(MediaType.APPLICATION_JSON)
+    public ReservaRepresentation consultarPorId(@PathParam("id") Integer id) {
+        return this.construirLinks(this.reservaService.consultarPorId(id));
     }
 
     @POST
@@ -53,7 +56,7 @@ public class ReservaResource {
 
     @PUT
     @Path("/{id}")
-    public Response actualizar(@PathParam("id") Long id, ReservaRepresentation reserva) {
+    public Response actualizar(@PathParam("id") Integer id, ReservaRepresentation reserva) {
         try {
             this.reservaService.actualizar(id, reserva);
             return Response.ok().build();
@@ -64,7 +67,7 @@ public class ReservaResource {
 
     @DELETE
     @Path("/{id}")
-    public Response eliminar(@PathParam("id") Long id) {
+    public Response eliminar(@PathParam("id") Integer id) {
         try {
             this.reservaService.eliminar(id);
             return Response.ok().build();
@@ -73,4 +76,24 @@ public class ReservaResource {
         }
     }
 
+    private ReservaRepresentation construirLinks(ReservaRepresentation reserva) {
+        String self = this.info.getBaseUriBuilder().path(ReservaResource.class).path(String.valueOf(reserva.getId()))
+                .build().toString();
+
+        reserva.setLinks(List.of(new LinkDTO(self, "self")));
+        return reserva;
+    }
+
+    private List<ReservaRepresentation> construirLinks(List<ReservaRepresentation> reservas) {
+        for (ReservaRepresentation reserva : reservas) {
+            String self = this.info.getBaseUriBuilder()
+                    .path(ReservaResource.class)
+                    .path(String.valueOf(reserva.getId()))
+                    .build()
+                    .toString();
+
+            reserva.setLinks(List.of(new LinkDTO(self, "self")));
+        }
+        return reservas;
+    }
 }
