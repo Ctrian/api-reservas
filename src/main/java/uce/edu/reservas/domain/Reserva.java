@@ -37,6 +37,9 @@ public class Reserva extends PanacheEntityBase {
     @Column(name = "estado")
     private String estado;
 
+    @Column(name = "asiento")
+    private Integer asiento;
+
     @ManyToOne
     @JoinColumn(name = "id_avion")
     private Avion avion;
@@ -87,6 +90,14 @@ public class Reserva extends PanacheEntityBase {
 
     public Double getPrecio() {
         return precio;
+    }
+
+    public Integer getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(Integer asiento) {
+        this.asiento = asiento;
     }
 
     public void setPrecio(Double precio) {
