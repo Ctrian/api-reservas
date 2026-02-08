@@ -1,5 +1,7 @@
 package uce.edu.reservas.application.representation;
 
+import java.util.List;
+
 public class PasajeroRepresentation {
     private Integer id;
     private String nombre;
@@ -7,6 +9,9 @@ public class PasajeroRepresentation {
     private String cedula;
     private String telefono;
     private String correo;
+    private List<LinkDTO> links;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -54,5 +59,13 @@ public class PasajeroRepresentation {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public List<LinkDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<LinkDTO> links) {
+        this.links = links;
     }
 }
