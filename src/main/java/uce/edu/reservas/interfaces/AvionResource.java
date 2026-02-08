@@ -71,13 +71,6 @@ public class AvionResource {
         this.avionService.eliminar(id);
     }
 
-    @GET
-    @Path("/aerolinea")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<AvionRepresentation> buscarPorAerolinea(@QueryParam("aerolinea") String aerolinea) {
-        return this.avionService.buscarPorAerolinea(aerolinea);
-    }
-
     private AvionRepresentation construirLinks(AvionRepresentation avion) {
         String self = this.info.getBaseUriBuilder().path(AvionResource.class).path(String.valueOf(avion.getId()))
                 .build().toString();
