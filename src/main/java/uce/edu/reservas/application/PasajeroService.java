@@ -25,14 +25,13 @@ public class PasajeroService {
     }
 
     @Transactional
-    public PasajeroRepresentation createPasajero(PasajeroRepresentation pasajero) {
+    public void createPasajero(PasajeroRepresentation pasajero) {
         this.pasajeroRepository.persist(this.toEntity(pasajero));
-        return pasajero;
     }
 
     @Transactional
-    public void updatePasajero(Long id, PasajeroRepresentation pasajero) {
-        Pasajero entity = this.pasajeroRepository.findById(id.longValue());
+    public void updatePasajero(Integer id, PasajeroRepresentation pasajero) {
+        PasajeroRepresentation entity = this.consultarPorId(id);
         if (entity == null) {
             return;
         }
@@ -41,12 +40,13 @@ public class PasajeroService {
         entity.setCedula(pasajero.getCedula());
         entity.setTelefono(pasajero.getTelefono());
         entity.setCorreo(pasajero.getCorreo());
-        this.pasajeroRepository.getEntityManager().merge(entity);
+
+        this.pasajeroRepository.getEntityManager().merge(this.toEntity(pasajero));
     }
 
     @Transactional
-    public void actualiarParcial(Long id, PasajeroRepresentation pasajero) {
-        Pasajero entity = this.pasajeroRepository.findById(id.longValue());
+    public void actualiarParcial(Integer id, PasajeroRepresentation pasajero) {
+        PasajeroRepresentation entity = this.consultarPorId(id);
         if (entity == null) {
             return;
         }
@@ -69,12 +69,8 @@ public class PasajeroService {
     }
 
     @Transactional
-    public void deletePasajero(Long id) {
-        Pasajero entity = this.pasajeroRepository.findById(id.longValue());
-        if (entity == null) {
-            return;
-        }
-        entity.delete();
+    public void deletePasajero(Integer id) {
+        this.pasajeroRepository.deleteById(id.longValue());
     }
 
     private PasajeroRepresentation toRepresentation(Pasajero pasajero) {

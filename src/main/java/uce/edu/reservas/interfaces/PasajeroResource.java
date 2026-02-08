@@ -56,7 +56,7 @@ public class PasajeroResource {
 
     @PUT
     @Path("/{id}")
-    public Response actualizar(@PathParam("id") Long id, PasajeroRepresentation pasajero) {
+    public Response actualizar(@PathParam("id") Integer id, PasajeroRepresentation pasajero) {
         try {
             this.pasajeroService.updatePasajero(id, pasajero);
             return Response.ok().build();
@@ -67,7 +67,7 @@ public class PasajeroResource {
 
     @DELETE
     @Path("/{id}")
-    public Response eliminar(@PathParam("id") Long id) {
+    public Response eliminar(@PathParam("id") Integer id) {
         try {
             this.pasajeroService.deletePasajero(id);
             return Response.ok().build();
