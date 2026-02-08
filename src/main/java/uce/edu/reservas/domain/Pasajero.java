@@ -5,6 +5,7 @@ import java.util.Set;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +36,7 @@ public class Pasajero extends PanacheEntityBase {
     @Column(name = "correo")
     private String correo;
 
-    @OneToMany(mappedBy = "pasajero")
+    @OneToMany(mappedBy = "pasajero", fetch = FetchType.LAZY)
     private Set<Reserva> reservas;
 
     public Integer getId() {
