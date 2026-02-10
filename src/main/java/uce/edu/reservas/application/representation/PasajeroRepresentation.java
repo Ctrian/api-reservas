@@ -2,6 +2,8 @@ package uce.edu.reservas.application.representation;
 
 import java.util.List;
 
+import uce.edu.reservas.domain.Pasajero;
+
 public class PasajeroRepresentation {
     private Integer id;
     private String nombre;
@@ -10,6 +12,28 @@ public class PasajeroRepresentation {
     private String telefono;
     private String correo;
     private List<LinkDTO> links;
+
+    public static PasajeroRepresentation toRepresentation(Pasajero pasajero) {
+        PasajeroRepresentation representation = new PasajeroRepresentation();
+        representation.setId(pasajero.getId());
+        representation.setNombre(pasajero.getNombre());
+        representation.setApellido(pasajero.getApellido());
+        representation.setCedula(pasajero.getCedula());
+        representation.setTelefono(pasajero.getTelefono());
+        representation.setCorreo(pasajero.getCorreo());
+        return representation;
+    }
+
+    public static Pasajero toEntity(PasajeroRepresentation representation) {
+        Pasajero entity = new Pasajero();
+        entity.setId(representation.getId());
+        entity.setNombre(representation.getNombre());
+        entity.setApellido(representation.getApellido());
+        entity.setCedula(representation.getCedula());
+        entity.setTelefono(representation.getTelefono());
+        entity.setCorreo(representation.getCorreo());
+        return entity;
+    }
 
     // Getters and Setters
 

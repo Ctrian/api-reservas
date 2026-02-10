@@ -2,6 +2,8 @@ package uce.edu.reservas.application.representation;
 
 import java.util.List;
 
+import uce.edu.reservas.domain.Avion;
+
 public class AvionRepresentation {
     private Integer id;
     private String modelo;
@@ -10,6 +12,28 @@ public class AvionRepresentation {
     private String clase;
     private String espacioEquipaje;
     private List<LinkDTO> links;
+
+    public static AvionRepresentation mapper(Avion avion) {
+        AvionRepresentation aviR = new AvionRepresentation();
+        aviR.setId(avion.getId());
+        aviR.setModelo(avion.getModelo());
+        aviR.setCapacidad(avion.getCapacidad());
+        aviR.setAerolinea(avion.getAerolinea());
+        aviR.setClase(avion.getClase());
+        aviR.setEspacioEquipaje(avion.getEspacioEquipaje());
+        return aviR;
+    }
+
+    public static Avion mappearAvion(AvionRepresentation avion) {
+        Avion avi = new Avion();
+        avi.setId(avion.getId());
+        avi.setModelo(avion.getModelo());
+        avi.setCapacidad(avion.getCapacidad());
+        avi.setAerolinea(avion.getAerolinea());
+        avi.setClase(avion.getClase());
+        avi.setEspacioEquipaje(avion.getEspacioEquipaje());
+        return avi;
+    }
 
     // Getters and Setters
 
@@ -68,4 +92,5 @@ public class AvionRepresentation {
     public void setLinks(List<LinkDTO> links) {
         this.links = links;
     }
+
 }

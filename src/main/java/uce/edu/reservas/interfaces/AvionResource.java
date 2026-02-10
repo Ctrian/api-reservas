@@ -2,6 +2,8 @@ package uce.edu.reservas.interfaces;
 
 import java.util.List;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -31,6 +33,8 @@ public class AvionResource {
 
     @GET
     @Path("")
+    // @RolesAllowed("admin")
+    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     public List<AvionRepresentation> encontrarTodos() {
         return this.construirLinks(this.avionService.listarTodos());

@@ -56,7 +56,6 @@ public class ReservaService {
         entity.setAsiento(reserva.getAsiento());
         entity.setAvion(avion);
         entity.setPasajero(pasajero);
-        this.reservaRepository.getEntityManager().merge(this.mappearReserva(reserva));
     }
 
     @Transactional
@@ -71,7 +70,6 @@ public class ReservaService {
         entity.setAsiento(reserva.getAsiento());
         entity.setAvion(this.avionRepository.findById(reserva.getIdAvion()));
         entity.setPasajero(this.pasajeroRepository.findById(reserva.getIdPasajero()));
-        this.reservaRepository.getEntityManager().merge(this.mappearReserva(reserva));
     }
 
     @Transactional
