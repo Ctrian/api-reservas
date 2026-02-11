@@ -3,7 +3,6 @@ package uce.edu.reservas.domain;
 import java.util.Set;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,22 +17,17 @@ import jakarta.persistence.Table;
 @SequenceGenerator(name = "avion_seq", sequenceName = "avion_sequence", allocationSize = 1)
 public class Avion extends PanacheEntityBase {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estudiante_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avion_seq")
     private Integer id;
 
-    @Column(name = "modelo")
     private String modelo;
 
-    @Column(name = "capacidad")
     private Integer capacidad;
 
-    @Column(name = "aerolinea")
     private String aerolinea;
 
-    @Column(name = "clase")
     private String clase;
 
-    @Column(name = "espacio_equipaje")
     private String espacioEquipaje;
 
     @OneToMany(mappedBy = "avion", fetch = FetchType.LAZY)

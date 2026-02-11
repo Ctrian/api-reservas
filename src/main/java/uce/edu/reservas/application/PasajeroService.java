@@ -23,6 +23,10 @@ public class PasajeroService {
         return PasajeroRepresentation.toRepresentation(this.pasajeroRepository.findById(id.longValue()));
     }
 
+    public PasajeroRepresentation consultarPorCedula(String cedula) {
+        return PasajeroRepresentation.toRepresentation(this.pasajeroRepository.find("cedula", cedula).firstResult());
+    }
+
     @Transactional
     public void createPasajero(PasajeroRepresentation pasajero) {
         this.pasajeroRepository.persist(PasajeroRepresentation.toEntity(pasajero));

@@ -22,7 +22,6 @@ import uce.edu.reservas.application.representation.AvionRepresentation;
 import uce.edu.reservas.application.representation.LinkDTO;
 
 @Path("/aviones")
-@Consumes("application/json")
 public class AvionResource {
 
     @Inject
@@ -45,6 +44,14 @@ public class AvionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public AvionRepresentation encontrarPorId(@PathParam("id") Integer id) {
         return this.construirLinks(this.avionService.consultarPorId(id));
+    }
+
+    @GET
+    @Path("/aerolinea/{aerolinea}")
+    @RolesAllowed("admin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AvionRepresentation buscarPorAerolinea(@PathParam("aerolinea") String aerolinea) {
+        return this.construirLinks(this.avionService.consultarPorAerolinea(aerolinea));
     }
 
     @POST

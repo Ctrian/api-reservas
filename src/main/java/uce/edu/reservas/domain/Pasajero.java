@@ -1,9 +1,10 @@
 package uce.edu.reservas.domain;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -21,19 +22,16 @@ public class Pasajero extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pasajero_seq")
     private Integer id;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido")
     private String apellido;
 
-    @Column(name = "cedula")
     private String cedula;
 
-    @Column(name = "telefono")
+    private LocalDateTime fechaNacimiento;
+
     private String telefono;
 
-    @Column(name = "correo")
     private String correo;
 
     @OneToMany(mappedBy = "pasajero", fetch = FetchType.LAZY)
@@ -73,6 +71,14 @@ public class Pasajero extends PanacheEntityBase {
 
     public String getTelefono() {
         return telefono;
+    }
+
+    public LocalDateTime getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setTelefono(String telefono) {

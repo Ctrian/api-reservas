@@ -1,7 +1,6 @@
 package uce.edu.reservas.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,25 +18,18 @@ public class Reserva extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reserva_seq")
     private Integer id;
 
-    @Column(name = "fecha")
     private String fecha;
 
-    @Column(name = "hora")
     private String hora;
 
-    @Column(name = "origen")
     private String origen;
 
-    @Column(name = "destino")
     private String destino;
 
-    @Column(name = "precio")
     private Double precio;
 
-    @Column(name = "estado")
     private String estado;
 
-    @Column(name = "asiento")
     private Integer asiento;
 
     @ManyToOne

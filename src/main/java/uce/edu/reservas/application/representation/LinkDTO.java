@@ -5,7 +5,6 @@ public class LinkDTO {
     public String rel;
 
     public LinkDTO() {
-
     }
 
     public LinkDTO(String href, String rel) {

@@ -44,36 +44,28 @@ public class PasajeroResource {
         return this.construirLinks(this.pasajeroService.consultarPorId(id));
     }
 
+    @GET
+    @Path("/cedula/{cedula}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PasajeroRepresentation consultarPorCedula(@PathParam("cedula") String cedula) {
+        return this.construirLinks(this.pasajeroService.consultarPorCedula(cedula));
+    }
+
     @POST
-    public Response crear(PasajeroRepresentation pasajero) {
-        try {
-            this.pasajeroService.createPasajero(pasajero);
-            return Response.status(Response.Status.CREATED).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    public void crear(PasajeroRepresentation pasajero) {
+        this.pasajeroService.createPasajero(pasajero);
     }
 
     @PUT
     @Path("/{id}")
-    public Response actualizar(@PathParam("id") Integer id, PasajeroRepresentation pasajero) {
-        try {
-            this.pasajeroService.updatePasajero(id, pasajero);
-            return Response.ok().build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    public void actualizar(@PathParam("id") Integer id, PasajeroRepresentation pasajero) {
+        this.pasajeroService.updatePasajero(id, pasajero);
     }
 
     @DELETE
     @Path("/{id}")
-    public Response eliminar(@PathParam("id") Integer id) {
-        try {
-            this.pasajeroService.deletePasajero(id);
-            return Response.ok().build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    public void eliminar(@PathParam("id") Integer id) {
+        this.pasajeroService.deletePasajero(id);
     }
 
     private PasajeroRepresentation construirLinks(PasajeroRepresentation pasajero) {

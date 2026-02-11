@@ -1,5 +1,6 @@
 package uce.edu.reservas.application.representation;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import uce.edu.reservas.domain.Pasajero;
@@ -9,6 +10,7 @@ public class PasajeroRepresentation {
     private String nombre;
     private String apellido;
     private String cedula;
+    private LocalDateTime fechaNacimiento;
     private String telefono;
     private String correo;
     private List<LinkDTO> links;
@@ -19,6 +21,7 @@ public class PasajeroRepresentation {
         representation.setNombre(pasajero.getNombre());
         representation.setApellido(pasajero.getApellido());
         representation.setCedula(pasajero.getCedula());
+        representation.setFechaNacimiento(pasajero.getFechaNacimiento());
         representation.setTelefono(pasajero.getTelefono());
         representation.setCorreo(pasajero.getCorreo());
         return representation;
@@ -30,6 +33,7 @@ public class PasajeroRepresentation {
         entity.setNombre(representation.getNombre());
         entity.setApellido(representation.getApellido());
         entity.setCedula(representation.getCedula());
+        entity.setFechaNacimiento(representation.getFechaNacimiento());
         entity.setTelefono(representation.getTelefono());
         entity.setCorreo(representation.getCorreo());
         return entity;
@@ -75,6 +79,14 @@ public class PasajeroRepresentation {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public LocalDateTime getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getTelefono() {

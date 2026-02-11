@@ -23,6 +23,10 @@ public class AvionService {
         return AvionRepresentation.mapper(this.avionRepository.findById(id.longValue()));
     }
 
+    public AvionRepresentation consultarPorAerolinea(String aerolinea) {
+        return AvionRepresentation.mapper(this.avionRepository.find("aerolinea", aerolinea).firstResult());
+    }
+
     public void crear(AvionRepresentation avion) {
         this.avionRepository.persist(AvionRepresentation.mappearAvion(avion));
     }
@@ -64,10 +68,6 @@ public class AvionService {
     @Transactional
     public void eliminar(Integer id) {
         this.avionRepository.deleteById(id.longValue());
-    }
-
-    public List<AvionRepresentation> buscarPorAerolinea(String aerolinea) {
-        return this.avionRepository.list("aerolinea", aerolinea).stream().map(AvionRepresentation::mapper).toList();
     }
 
 }
