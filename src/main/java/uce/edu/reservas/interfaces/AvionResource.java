@@ -33,8 +33,7 @@ public class AvionResource {
 
     @GET
     @Path("")
-    // @RolesAllowed("admin")
-    @PermitAll
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     public List<AvionRepresentation> encontrarTodos() {
         return this.construirLinks(this.avionService.listarTodos());
@@ -42,6 +41,7 @@ public class AvionResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     public AvionRepresentation encontrarPorId(@PathParam("id") Integer id) {
         return this.construirLinks(this.avionService.consultarPorId(id));
@@ -49,6 +49,7 @@ public class AvionResource {
 
     @POST
     @Path("")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     public void crear(AvionRepresentation avion) {
         this.avionService.crear(avion);
@@ -56,6 +57,7 @@ public class AvionResource {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     public void actualizar(@PathParam("id") Integer id, AvionRepresentation avion) {
         this.avionService.actualizar(id, avion);
@@ -63,6 +65,7 @@ public class AvionResource {
 
     @PATCH
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     public void actualizarParcial(@PathParam("id") Integer id, AvionRepresentation avion) {
         this.avionService.actualiarParcial(id, avion);
@@ -70,6 +73,7 @@ public class AvionResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("admin")
     public void eliminar(@PathParam("id") Integer id) {
         this.avionService.eliminar(id);
     }
