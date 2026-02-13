@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import uce.edu.reservas.application.representation.PasajeroRepresentation;
+import uce.edu.reservas.domain.Pasajero;
 import uce.edu.reservas.infraestructure.PasajeroRepository;
 
 @Transactional
@@ -34,17 +35,18 @@ public class PasajeroService {
 
     @Transactional
     public void updatePasajero(Integer id, PasajeroRepresentation pasajero) {
-        PasajeroRepresentation entity = this.consultarPorId(id);
+        Pasajero entity = PasajeroRepresentation.toEntity(this.consultarPorId(id));
         if (entity == null) {
             return;
         }
+        //entity.setId(pasajero.getId());
         entity.setNombre(pasajero.getNombre());
         entity.setApellido(pasajero.getApellido());
         entity.setCedula(pasajero.getCedula());
         entity.setTelefono(pasajero.getTelefono());
         entity.setCorreo(pasajero.getCorreo());
 
-        this.pasajeroRepository.getEntityManager().merge(PasajeroRepresentation.toEntity(pasajero));
+        this.pasajeroRepository.getEntityManager().merge(entity);
     }
 
     @Transactional

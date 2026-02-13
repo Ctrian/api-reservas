@@ -51,8 +51,11 @@ public class ReservaService {
             return;
         }
         entity.setFecha(reserva.getFecha());
-        entity.setEstado(reserva.getEstado());
+        entity.setHora(reserva.getHora());
+        entity.setOrigen(reserva.getOrigen());
+        entity.setDestino(reserva.getDestino());
         entity.setPrecio(reserva.getPrecio());
+        entity.setEstado(reserva.getEstado());
         entity.setAsiento(reserva.getAsiento());
         entity.setAvion(avion);
         entity.setPasajero(pasajero);

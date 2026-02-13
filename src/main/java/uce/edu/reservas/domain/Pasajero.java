@@ -1,10 +1,10 @@
 package uce.edu.reservas.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +25,8 @@ public class Pasajero extends PanacheEntityBase {
     private String nombre;
 
     private String apellido;
-
+    
+    @Column(unique = true, nullable = false)
     private String cedula;
 
     private LocalDateTime fechaNacimiento;

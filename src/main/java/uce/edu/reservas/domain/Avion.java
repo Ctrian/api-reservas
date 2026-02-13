@@ -3,6 +3,7 @@ package uce.edu.reservas.domain;
 import java.util.Set;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Avion extends PanacheEntityBase {
     private String modelo;
 
     private Integer capacidad;
-
+    @Column(unique = true, nullable = false)
     private String aerolinea;
 
     private String clase;
